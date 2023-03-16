@@ -93,7 +93,7 @@ inputActivatePinOrder = []
 for i in range(len(inputActivatePin)): 
     inputActivatePinOrder.append(int(i))
 MQTTStationID = [str(stationID),str(stationID),str(stationID),str(stationID),str(stationID),str(stationID)]
-MQTTType = ["SL", "SR", "BC", "DC", "RC","DCNV"]
+MQTTType = ["SL", "SR", "BC", "DC", "RC","DCNV"]    # BC = bottom conveyor, DC = dispatch cargo, RC = raising conveyor, DCNV = dispatch cargo with no VREP
 MQTTStatusAct = ["Close","Close","Activate","Activate","Activate","Activate"]
 MQTTStatusDeAct = ["Open","Open","Deactivate","Deactivate","Deactivate","Deactivate"]
 MQTTPLCActionPin = [0,0,32,38,36,38]   # Activate action corresponding rasp pi pin to PLC

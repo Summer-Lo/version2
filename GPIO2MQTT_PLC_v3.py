@@ -174,9 +174,9 @@ def GPIOArduinocheck():
 							pass
 						elif(hc.MQTTStatusAct[i] == "Close"):				# BC = bottom conveyor, DC = dispatch cargo, RC = raising conveyor, DCNV = dispatch cargo with no VREP
 							if(hc.MQTTType[i] == "SL"):						# Check Left Stopper or Right stopper
-								message = mqtt_message_generator_mailing("cargo2", str(hc.stationID),"CloseL","NA")							
+								message = MQTTsetup.mqtt_message_generator_mailing("cargo2", str(hc.stationID),"CloseL","test")							
 							elif(hc.MQTTType[i] == "SR"):
-								message = mqtt_message_generator_mailing("cargo2", str(hc.stationID),"CloseR","NA")
+								message = MQTTsetup.mqtt_message_generator_mailing("cargo2", str(hc.stationID),"CloseR","test")
 							MQTTsetup.mqtt_publish_record(client,host.mailingTopic,message)
 							print(f"[Mailing] The {hc.MQTTType[i]} CLOSE message of {str(hc.stationID)} sent to VREP")
 
@@ -197,9 +197,9 @@ def GPIOArduinocheck():
 							pass
 						elif(hc.MQTTStatusDeAct[i] == "Open"):				# BC = bottom conveyor, DC = dispatch cargo, RC = raising conveyor, DCNV = dispatch cargo with no VREP
 							if(hc.MQTTType[i] == "SL"):						# Check Left Stopper or Right stopper
-								message = mqtt_message_generator_mailing("cargo2", str(hc.stationID),"OpenL","NA")							
+								message = MQTTsetup.mqtt_message_generator_mailing("cargo2", str(hc.stationID),"OpenL","NA")							
 							elif(hc.MQTTType[i] == "SR"):
-								message = mqtt_message_generator_mailing("cargo2", str(hc.stationID),"OpenR","NA")
+								message = MQTTsetup.mqtt_message_generator_mailing("cargo2", str(hc.stationID),"OpenR","NA")
 							MQTTsetup.mqtt_publish_record(client,host.mailingTopic,message)
 							print(f"[Mailing] The {hc.MQTTType[i]} OPEN message of {str(hc.stationID)} sent to VREP")
 	''' 

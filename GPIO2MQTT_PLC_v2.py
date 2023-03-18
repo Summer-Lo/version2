@@ -169,7 +169,7 @@ def GPIOArduinocheck():
 							print("Current PLC input status in: ", hc.plcInputCurrentStatusPin)
 							if(hc.MQTTType[i] == "DC"):
 								hc.start_time = time.time()
-								message = MQTTsetup.mqtt_message_generator_mailing("cargo2", str(hc.stationID),"Mail","NA")
+								message = MQTTsetup.mqtt_message_generator_mailing("cargo1", str(hc.stationID),"Mail","NA")
 								MQTTsetup.mqtt_publish_record(client,host.mailingTopic,message)
 							pass
 

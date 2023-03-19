@@ -10,11 +10,11 @@ else:
         print("Invalid Input! Please try again!")
         mode = input("Please input the Mode ID (1 == V-REP, 2 == PLC): ")
 # Raspberry Pi ID
-stationID = "HMT"
+stationID = "HP"
 # station ID can be ["XH","QP","PD","JD","HP","HMT","SKM","MGK","TST",SWN"]
 palletID = "1"
 # pallet ID can be ["1","2","3"]
-piID = "04"
+piID = "01"
 #pi ID can be ["01","02","03","04","05","06","07","08","09","10","11","12",]
 
 # pin number and order refer to the IO table
@@ -93,7 +93,7 @@ inputActivatePinOrder = []
 for i in range(len(inputActivatePin)): 
     inputActivatePinOrder.append(int(i))
 MQTTStationID = [str(stationID),str(stationID),str(stationID),str(stationID),str(stationID),str(stationID)]
-MQTTType = ["SL", "SR", "BC", "DC", "RC","DCNV"]    # BC = bottom conveyor, DC = dispatch cargo, RC = raising conveyor, DCNV = dispatch cargo with no VREP
+MQTTType = ["SL", "SR", "BC", "DC", "RC","DCNV"]
 MQTTStatusAct = ["Close","Close","Activate","Activate","Activate","Activate"]
 MQTTStatusDeAct = ["Open","Open","Deactivate","Deactivate","Deactivate","Deactivate"]
 MQTTPLCActionPin = [0,0,32,38,36,38]   # Activate action corresponding rasp pi pin to PLC

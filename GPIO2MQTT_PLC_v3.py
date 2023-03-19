@@ -41,7 +41,7 @@ num_packet = 0
 currentStatusPin13 = 1		# (BJT)
 currentStatusPin15 = 1		# (BJT)
 currentStatusPin16 = 0
-currentStatusPin18 = 0
+currentStatusPin22 = 0
 
 
 countPin13 = 0
@@ -54,7 +54,7 @@ def on_connect(client, userdata, flags, rc):
 	client.subscribe([(host.studentTopic,0),(host.stationTopic,0),(host.statusTopic,0),(host.arduinoTopic,0),(host.piTopic,0)])
 
 def on_message(client, userdata, msg):
-	global num_packet, currentStatusPin16, currentStatusPin18
+	global num_packet, currentStatusPin16, currentStatusPin22
 	print(f"Message received from topic {msg.topic} num={num_packet}", msg.payload.decode())
 	num_packet += 1
 
@@ -98,11 +98,11 @@ def on_message(client, userdata, msg):
 		status = iotData["Status"]
 		if(str(station) == host.stationID):
 			if(str(status) == "end"):
-				statusPin18 = GPIO.output(18,1)		# Pin16 (GPIO23) status (sensor)
-				currentStatusPin18 = 1
+				statusPin22 = GPIO.output(22,1)		# Pin16 (GPIO23) status (sensor)
+				currentStatusPin22 = 1
 				time.sleep(0.05)
-				statusPin18 = GPIO.output(18,0)		# Pin16 (GPIO23) status (sensor)
-				currentStatusPin18 = 0
+				statusPin22 = GPIO.output(22,0)		# Pin16 (GPIO23) status (sensor)
+				currentStatusPin22 = 0
 			#elif(str(status) == "reset"):
 				#statusPin16 = GPIO.output(18,0)		# Pin16 (GPIO23) status (sensor)
 				#currentStatusPin18 = 0

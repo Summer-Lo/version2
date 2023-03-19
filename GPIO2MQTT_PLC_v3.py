@@ -51,7 +51,7 @@ countPin15 = 0
 
 def on_connect(client, userdata, flags, rc):
 	print("Connected with result code "+str(rc))
-	client.subscribe([(host.studentTopic,0),(host.stationTopic,0),(host.statusTopic,0),(host.arduinoTopic,0),(host.piTopic,0)])
+	client.subscribe([(host.studentTopic,0),(host.stationTopic,0),(host.statusTopic,0),(host.arduinoTopic,0),(host.piTopic,0),(host.mailingTopic,0)])
 
 def on_message(client, userdata, msg):
 	global num_packet, currentStatusPin16, currentStatusPin22
@@ -116,6 +116,19 @@ def on_message(client, userdata, msg):
 				GPIO.output(33,1)
 				time.sleep(0.1)
 				GPIO.output(33,0)
+	elif(str(msg.topic) == host.mailingTopic):
+		iotData = json.loads(msg.payload.decode())
+		mailingID = iotData["ID"]
+		station = iotData["Destination"]
+		status = iotData["Status"]
+		if(str(station) == str(host.stationID) and (str(status) == "Mail")):
+			GPIO.output(38,0)
+			time.sleep(0.1)
+			GPIO.output(38,1)
+			print("[Mailing] Complete the Dispatching ULD Cargo from MQTT Mailing message!")
+			#dispatchTimer = threading.Thread(target=timerLeftPLC,args=(5,38,))
+			#dispatchTimer.start()
+			print("[Mailing] Reset the Dispatching ULD Cargo pin 38!")
 
 def timerLeft(second,pinNo,arrayindex):
 	print(f"Timer {second} second is started now!")
@@ -124,6 +137,13 @@ def timerLeft(second,pinNo,arrayindex):
 	GPIO.output(int(pinNo),0)
 	hc.statusPin[int(arrayindex)] = 0
 	hc.currentStatusPin[int(arrayindex)] = 0
+	print("Pallet is leaved!!")
+
+def timerLeftPLC(second,pinNo):
+	print(f"Timer {second} second is started now!")
+	time.sleep(float(second))    	
+	print(f"Timer {second} second is ended now!")
+	GPIO.output(int(pinNo),0)
 	print("Pallet is leaved!!")
 
 	
